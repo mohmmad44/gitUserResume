@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Github Resume</title>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+	<form action="/generateResume" method="get">
+		<div class="wrapper">
+			<input type="text" class="input"
+				placeholder="Enter your GitHub username and click on generate"
+				name="userName" required="required">
+			<button class="searchbtn" type="submit">
+				<i class="fas fa-search"></i>
+			</button>
+		</div>
+	</form>
+</body>
+</html>

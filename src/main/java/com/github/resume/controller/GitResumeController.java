@@ -30,16 +30,20 @@ public class GitResumeController {
 		try {
 			GitUser user = gitResumeService.getGitUser(userName);
 			List<GitUserRepo> repos = gitResumeService.getGitUserRepos(userName);
+			
 			if (repos != null && repos.size() > 0) {
 				List<GitUserRepo> sortedList = repos.stream()
-						.sorted((p1, p2)-> (p2.getWatchers() + p2.getForks()) - (p1.getWatchers() + p1.getForks())).limit(5)
-						.collect(Collectors.toList());
+													.sorted((p1, p2)-> (p2.getWatchers() + p2.getForks()) - (p1.getWatchers() + p1.getForks())).limit(5)
+													.collect(Collectors.toList());
+				
 				Map<String, Integer>  languages = gitResumeService.getGitUserReposLang(userName, sortedList);
 				model.addAttribute("repos", sortedList);
 				model.addAttribute("languages", languages);
+				
 				int sum = 1;
 				if(languages!=null && languages.size()>0) {
-					sum = languages.values().stream().reduce(0, Integer::sum);
+					sum = languages.values().stream()
+											.reduce(0, Integer::sum);
 				}
 				model.addAttribute("sum", sum);
 			} else {
@@ -48,6 +52,7 @@ public class GitResumeController {
 
 			model.addAttribute("user", user);
 		} catch (Exception e) {
+			// user defined exceptions if required
 
 		}
 
